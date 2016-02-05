@@ -1,0 +1,14 @@
+Bug #1: Segfault
+    -struct int_list odd changed to struct int_list odd = {.next = NULL, .value =0};
+    -After while loop goes through once, there's a segfault
+
+Bug #2: assertion
+	-list = list->next;
+	-need to incrememnt previous or they will be separated 
+	-added previous = list;
+Bug #3: assert(0);
+	when if statement fails assert(0) runs and closes the program. returning a non 0 number fixes this
+
+Bug #4:
+
+Bug #5:

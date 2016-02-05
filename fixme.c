@@ -78,8 +78,9 @@ struct int_list primes = {.value = 2, .next = &list1};
 int main(int argc, char **argv)
 {
    // Set up a linked list of odds at run-time.
-   struct int_list odd;
-   list_add(&odd, 1);
+   struct int_list odd = {.next = NULL, .value =0};
+
+   list_add(&odd, 1); 
    list_add(&odd, 3);
    list_add(&odd, 5);
    list_add(&odd, 7);
@@ -191,14 +192,18 @@ int list_remove_first(struct int_list *list, int n)
    struct int_list *prev = list;
    while (list) {
       if (list->value == n) {
-         list_remove(list, prev);
+        
+        list_remove(list, prev);
+
          return 0;
       }
+      prev = list;
       list = list->next;
    }
 
+
    // I think we should never get here.
-   assert(0);
+   return 42;
 }
 
 
