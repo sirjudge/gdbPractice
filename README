@@ -6,9 +6,15 @@ Bug #2: assertion
 	-list = list->next;
 	-need to incrememnt previous or they will be separated 
 	-added previous = list;
+
 Bug #3: assert(0);
 	when if statement fails assert(0) runs and closes the program. returning a non 0 number fixes this
 
-Bug #4:
+Bug #4:	SIGABRT error
+	- assert(prev->next == node) fails 
+	- previous is null
+	-Solution: incriment the list every time you have a while loop so upon the first call previous won't be null
 
-Bug #5:
+Bug #5: INFINITE LOOPS R GRRRRRRR8
+	-struct int_list list2 = {.value = 5, .next = &list2};
+	- list2 goes to list2, instead list2 should go to list3

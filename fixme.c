@@ -69,7 +69,7 @@ struct int_list list6 = {.value = 17, .next = NULL};
 struct int_list list5 = {.value = 13, .next = &list6};
 struct int_list list4 = {.value = 11, .next = &list5};
 struct int_list list3 = {.value = 7, .next = &list4};
-struct int_list list2 = {.value = 5, .next = &list2};
+struct int_list list2 = {.value = 5, .next = &list3};
 struct int_list list1 = {.value = 3, .next = &list2};
 struct int_list primes = {.value = 2, .next = &list1};
 
@@ -78,7 +78,7 @@ struct int_list primes = {.value = 2, .next = &list1};
 int main(int argc, char **argv)
 {
    // Set up a linked list of odds at run-time.
-   struct int_list odd = {.next = NULL, .value =0};
+   struct int_list odd = {.next = NULL, .value = 0};
 
    list_add(&odd, 1); 
    list_add(&odd, 3);
@@ -136,6 +136,8 @@ int list_add(struct int_list *list, int n)
    // The NULL pointer has a value of 0.  This condition is equivalent to
    // 'list != NULL', but this is the way most experienced C programmers
    // write their code.
+
+   list = list->next;
    while (list) {
       end = list;
       // Advance to the next element of the list.
@@ -160,6 +162,8 @@ int list_add(struct int_list *list, int n)
 // (int n), 0 otherwise.
 int list_contains(struct int_list *list, int n)
 {
+
+   list = list->next;
    while (list) {
       if (list->value == n)
          return 1;
@@ -176,8 +180,8 @@ void list_remove(struct int_list *node, struct int_list *prev)
 {
    // prev must be the node before node.
    // assert() will terminate the program if its condition is false.
+   
    assert(prev->next == node);
-
    prev->next = node->next;
    free(node);
 }
@@ -190,6 +194,10 @@ int list_remove_first(struct int_list *list, int n)
 {
    // Search for the list element n.  Remove it, when found.
    struct int_list *prev = list;
+ //Incriment the list so you don't get a error
+  prev = list;
+  list = list->next;
+
    while (list) {
       if (list->value == n) {
         
@@ -206,11 +214,12 @@ int list_remove_first(struct int_list *list, int n)
    return 42;
 }
 
-
+ 
 // Print the elements of a list (parameter list).
 // Returns nothing.
 void list_print(struct int_list *list)
 {
+   list = list->next;
    while (list) {
       printf("%d ", list->value);
       list = list->next;
